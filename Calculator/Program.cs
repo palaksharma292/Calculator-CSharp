@@ -18,18 +18,27 @@ namespace Class1
             operators.Add("*");
             operators.Add("+");
             operators.Add("-");
-            Console.WriteLine("Enter the expression to evaluate it");
-            string input = Console.ReadLine();
-            Extract(input);
-            while(expression.Count>1)
+            string input="";
+            do
             {
-                expression=Evaluate(expression); 
-                for(int j=0;j<expression.Count;j++)
+                Console.WriteLine("Enter the expression to evaluate it\nEnter exit to leave the calculator");
+                input = Console.ReadLine();
+                if(input=="exit")
+                {
+                    break;
+                }
+                expression.Clear();
+                Extract(input);
+                while(expression.Count>1)
+                {
+                    expression=Evaluate(expression); 
+                    for(int j=0;j<expression.Count;j++)
                     {
                         Console.Write(expression[j]);
                     }
                     Console.WriteLine();
-            }
+                }
+            } while (input!="exit");
         }
 
         public static void Extract(string expr)
