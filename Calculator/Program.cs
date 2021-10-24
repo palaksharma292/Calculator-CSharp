@@ -25,6 +25,10 @@ namespace Class1
             int num=0;
             for(int i=0;i<expr.Length;i++)
             {
+                if(expr.Substring(i,1)==" ")
+                {
+                    continue;
+                }
                 int digit=0;
                 bool canConvert= int.TryParse(expr.Substring(i,1),out digit);
                 if(canConvert)
@@ -43,7 +47,10 @@ namespace Class1
                     expression.Add(expr.Substring(i,1));
                 }
             }
-            
+            if(num!=0)
+            {
+                expression.Add(num);
+            }
         }
     }
 }
