@@ -92,9 +92,13 @@ namespace Class1
                 {
                     section=Evaluate(section);
                 }
-                if(expression[expression.IndexOf("(")-1].GetType()== typeof(double))
+
+                if(expression.IndexOf("(")>0)
                 {
-                    expression.Insert(expression.IndexOf("("),"*");
+                    if(expression[expression.IndexOf("(")-1].GetType()== typeof(double))
+                    {
+                        expression.Insert(expression.IndexOf("("),"*");
+                    }
                 }
                 expression.Insert(expression.IndexOf("("),section[0]);
                 expression.RemoveRange(expression.IndexOf("("),secCount+2);
