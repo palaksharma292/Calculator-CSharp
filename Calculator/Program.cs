@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Class1
 {
-    class Program
+    public class Program
     {
         static ArrayList expression= new ArrayList();
         static ArrayList operators= new ArrayList();
