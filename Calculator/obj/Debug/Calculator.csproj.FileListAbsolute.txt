@@ -1,0 +1,7 @@
+C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\obj\Debug\Calculator.csproj.AssemblyReference.cache
+C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\bin\Debug\Calculator.exe.config
+C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\bin\Debug\Calculator.exe
+C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\bin\Debug\Calculator.pdb
+C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\obj\Debug\Calculator.exe
+C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\obj\Debug\Calculator.pdb
