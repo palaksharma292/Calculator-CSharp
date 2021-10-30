@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
 
 namespace Class1
 {
@@ -12,9 +11,11 @@ namespace Class1
     {
         public static ArrayList expression = new ArrayList();
         public static ArrayList operators = new ArrayList();
+        public static bool MainCheck = false;
 
         static void Main(string[] args)
         {
+            MainCheck = true;
             operators.Add("/");
             operators.Add("*");
             operators.Add("-");
@@ -34,7 +35,16 @@ namespace Class1
 
         public static string ProcessCommand(string input)
         {
-            string output;
+            // Add each operator to ArrayList operators when ProcessCommand() is being directly called from Class1.Tests
+            if (MainCheck == false)
+            {
+                operators.Add("/");
+                operators.Add("*");
+                operators.Add("-");
+                operators.Add("+");
+            }
+            string output = "";
+            var buildString = new StringBuilder();
             try
             {
                 expression.Clear();
@@ -48,7 +58,12 @@ namespace Class1
                     }
                     Console.WriteLine();
                 }
-                output = Convert.ToString(expression);
+                // Use StringBuilder class to convert ArrayList to string
+                for (int j = 0; j < expression.Count; j++)
+                {
+                    buildString.Append(expression[j]);
+                }
+                output = buildString.ToString();
                 return output;
             }
             catch (Exception e)
