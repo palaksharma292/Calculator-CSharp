@@ -13,23 +13,30 @@ namespace Class1
         static ArrayList expression = new ArrayList();
         static ArrayList operators = new ArrayList();
 
-
-
         static void Main(string[] args)
         {
             operators.Add("/");
             operators.Add("*");
             operators.Add("-");
             operators.Add("+");
-            string input = "";
+            string input;
             do
             {
-                Console.WriteLine("Enter the expression to evaluate it\nEnter exit to leave the calculator");
+                Console.WriteLine("Enter an expression to evaluate it\nEnter exit to leave the calculator");
                 input = Console.ReadLine();
                 if (input == "exit")
                 {
                     break;
                 }
+                ProcessCommand(input);
+            } while (input != "exit");
+        }
+
+        public static string ProcessCommand(string input)
+        {
+            string output;
+            try
+            {
                 expression.Clear();
                 Extract(input);
                 while (expression.Count > 1)
@@ -41,10 +48,14 @@ namespace Class1
                     }
                     Console.WriteLine();
                 }
-            } while (input != "exit");
+                output = Convert.ToString(expression);
+                return output;
+            }
+            catch (Exception e)
+            {
+                return "Error evaluating expression: " + e;
+            }
         }
-
-
 
         public static void Extract(string expr)
         {
@@ -68,9 +79,6 @@ namespace Class1
                     {
                         expression.Add(double.Parse(num));
                     }
-
-
-
                     num = "";
                     expression.Add(expr.Substring(i, 1));
                 }
@@ -80,8 +88,6 @@ namespace Class1
                 expression.Add(double.Parse(num));
             }
         }
-
-
 
         public static ArrayList Evaluate(ArrayList expression)
         {
@@ -101,9 +107,6 @@ namespace Class1
                 {
                     section = Evaluate(section);
                 }
-
-
-
                 if (expression.IndexOf("(") > 0)
                 {
                     if (expression[expression.IndexOf("(") - 1].GetType() == typeof(double))
@@ -125,8 +128,6 @@ namespace Class1
                             n1 = double.Parse(expression[i - 1].ToString());
                         if (expression[i + 1].GetType() == typeof(double))
                             n2 = double.Parse(expression[i + 1].ToString());
-
-
 
                         if (operators[op] == "+")
                         {
@@ -153,8 +154,6 @@ namespace Class1
                             val = n1 / n2;
                         }
 
-
-
                         expression[i - 1] = val;
                         expression.RemoveAt(i);
                         expression.RemoveAt(i);
@@ -170,18 +169,13 @@ namespace Class1
                         }
                         else
                         {
-                            throw new Exception("Wrong sintaxis");
+                            throw new Exception("Incorrect syntax, please try again");
                         }
                     }
                 }
             }
             return expression;
         }
-
-
-
-
-
     }
 }
 
