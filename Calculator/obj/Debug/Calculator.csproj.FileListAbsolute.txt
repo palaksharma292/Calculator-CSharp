@@ -5,3 +5,10 @@ C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Cal
 C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\bin\Debug\Calculator.pdb
 C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\obj\Debug\Calculator.exe
 C:\Users\Lenovo\OneDrive - Bow Valley College\Desktop\classes\Sem 3\SODV2202\Calculator-C-\Calculator\obj\Debug\Calculator.pdb
+F:\Programs\GitHub Repository\Calculator-CSharp\Calculator\bin\Debug\Calculator.exe.config
+F:\Programs\GitHub Repository\Calculator-CSharp\Calculator\bin\Debug\Calculator.exe
+F:\Programs\GitHub Repository\Calculator-CSharp\Calculator\bin\Debug\Calculator.pdb
+F:\Programs\GitHub Repository\Calculator-CSharp\Calculator\obj\Debug\Calculator.csproj.AssemblyReference.cache
+F:\Programs\GitHub Repository\Calculator-CSharp\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+F:\Programs\GitHub Repository\Calculator-CSharp\Calculator\obj\Debug\Calculator.exe
+F:\Programs\GitHub Repository\Calculator-CSharp\Calculator\obj\Debug\Calculator.pdb
