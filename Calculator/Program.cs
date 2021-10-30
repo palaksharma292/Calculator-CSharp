@@ -38,7 +38,7 @@ namespace Class1
             try
             {
                 expression.Clear();
-                Extract(input);
+                expression = Extract(input);
                 while (expression.Count > 1)
                 {
                     expression = Evaluate(expression);
@@ -57,8 +57,12 @@ namespace Class1
             }
         }
 
-        public static void Extract(string expr)
+        public static ArrayList Extract(string expr)
         {
+            if (expr.Contains("("))
+            {
+                expr = Extractforbracketts(expr);
+            }
             string num = "";
             for (int i = 0; i < expr.Length; i++)
             {
@@ -71,8 +75,38 @@ namespace Class1
                 if (canConvert || expr.Substring(i, 1) == ".")
                 {
                     num = num + expr.Substring(i, 1);
-                    continue;
                 }
+                //extract negative numbers ... begin
+                else if (expr.Substring(i, 1) == "-" && num == "")
+                {
+                    while (expr.Substring(i + 1, 1) == " ")
+                    {
+                        i++;
+                    }
+                    bool canConvertNext = int.TryParse(expr.Substring(i + 1, 1), out digit);
+                    if (canConvertNext)
+                    {
+                        if (i == 0)
+                        {
+                            num = "-";
+                        }
+                        else
+                        {
+                            int j = i;
+                            while (expr.Substring(j - 1, 1) == " ")
+                            {
+                                j--; ;
+                            }
+                            bool canConvertPrevious = int.TryParse(expr.Substring(j - 1, 1), out digit);
+                            if (!canConvertPrevious)
+                            {
+                                num = "-";
+                            }
+                        }
+                        continue;
+                    }
+                }
+                //end
                 else
                 {
                     if (num != "")
@@ -87,90 +121,89 @@ namespace Class1
             {
                 expression.Add(double.Parse(num));
             }
+            return expression;
+        }
+
+        //to handle brackets
+        public static string Extractforbracketts(string expr)
+        {
+            while (expr.Contains(")"))
+            {
+                for (int i = expr.IndexOf(")"); i >= 0; i--)
+                {
+                    if (expr.Substring(i, 1) == "(")
+                    {
+                        string section = expr.Substring(i, expr.IndexOf(")") + 1 - i);
+                        ArrayList arr = new ArrayList();
+                        arr = Extract(section.Substring(1, section.Length - 2));
+                        arr = Evaluate(arr);
+                        //add * to places where num and ( are together without operator
+                        if (expr.Substring(i, 1) == "(" && i > 0)
+                        {
+                            int digit;
+                            bool canConvertPrevious = int.TryParse(expr.Substring(i - 1, 1), out digit);
+                            if (canConvertPrevious)
+                            {
+                                expr = expr.Insert(i, "*");
+                            }
+                        }
+                        if (expr.IndexOf(")") < expr.Length - 1)
+                        {
+                            int digit;
+                            bool canConvertNext = int.TryParse(expr.Substring(expr.IndexOf(")") + 1, 1), out digit);
+                            if (canConvertNext)
+                            {
+                                expr = expr.Insert(expr.IndexOf(")") + 1, "*");
+                            }
+                        }
+                        //end
+                        expr = expr.Replace(section, arr[0].ToString());
+                        Console.WriteLine(expr);
+                        arr.Clear();
+                        break;
+                    }
+                }
+            }
+            return expr;
         }
 
         public static ArrayList Evaluate(ArrayList expression)
         {
             double val = 0;
             double n1 = 0, n2 = 0;
-            while (expression.Contains("("))
-            {
-                ArrayList section = new ArrayList();
-                int sI = expression.IndexOf("(") + 1;
-                while (sI < expression.LastIndexOf(")"))
-                {
-                    section.Add(expression[sI]);
-                    sI++;
-                }
-                int secCount = section.Count;
-                while (section.Count > 1)
-                {
-                    section = Evaluate(section);
-                }
-                if (expression.IndexOf("(") > 0)
-                {
-                    if (expression[expression.IndexOf("(") - 1].GetType() == typeof(double))
-                    {
-                        expression.Insert(expression.IndexOf("("), "*");
-                    }
-                }
-                expression.Insert(expression.IndexOf("("), section[0]);
-                expression.RemoveRange(expression.IndexOf("("), secCount + 2);
-            }
+
             for (int op = 0; op < operators.Count; op++)
             {
-                int i = expression.IndexOf(operators[op]);
-                if (i != -1)
+                while (expression.Contains(operators[op]))
                 {
-                    if (i - 1 >= 0)
+                    int i = expression.IndexOf(operators[op]);
+                    if (i >= 1)
                     {
                         if (expression[i - 1].GetType() == typeof(double))
                             n1 = double.Parse(expression[i - 1].ToString());
                         if (expression[i + 1].GetType() == typeof(double))
                             n2 = double.Parse(expression[i + 1].ToString());
 
-                        if (operators[op] == "+")
+                        if (operators[op].ToString() == "+")
                         {
                             val = n1 + n2;
                         }
-                        else if (operators[op] == "-")
+                        else if (operators[op].ToString() == "-")
                         {
-                            if (expression[i + 1].ToString() == "-")
-                            {
-                                val = n1 + double.Parse(expression[i + 2].ToString());
-                                expression.RemoveAt(i);
-                            }
-                            else
-                            {
-                                val = n1 - n2;
-                            }
+                            val = n1 - n2;
                         }
-                        else if (operators[op] == "*")
+                        else if (operators[op].ToString() == "*")
                         {
                             val = n1 * n2;
                         }
-                        else if (operators[op] == "/")
+                        else if (operators[op].ToString() == "/")
                         {
                             val = n1 / n2;
                         }
 
                         expression[i - 1] = val;
-                        expression.RemoveAt(i);
-                        expression.RemoveAt(i);
-                    }
-                    else
-                    {
-                        if (operators[op] == "-")
-                        {
-                            val = double.Parse(expression[i + 1].ToString());
-                            val *= -1;
-                            expression[i + 1] = val;
-                            expression.RemoveAt(i);
-                        }
-                        else
-                        {
-                            throw new Exception("Incorrect syntax, please try again");
-                        }
+                        expression.RemoveRange(i, 2);
+
                     }
                 }
             }
