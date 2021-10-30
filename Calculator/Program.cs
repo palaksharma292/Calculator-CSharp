@@ -10,8 +10,8 @@ namespace Class1
 {
     public class Program
     {
-        static ArrayList expression = new ArrayList();
-        static ArrayList operators = new ArrayList();
+        public static ArrayList expression = new ArrayList();
+        public static ArrayList operators = new ArrayList();
 
         static void Main(string[] args)
         {
