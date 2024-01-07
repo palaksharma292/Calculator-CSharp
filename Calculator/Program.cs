@@ -5,9 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// SODV2202 Assignment 1 Calculator
-// By: Connor Pittman, Palak Sharma, Oxana Beloken, Parry Sobti
-
 namespace Class1
 {
     public class Program
