@@ -7,10 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// SODV2202 Assignment 1 Calculator
-// By: Connor Pittman, Palak Sharma, Oxana Beloken, Parry Sobti
-
-// Test Class and Test Methods provided by Course Instructor
 namespace Class1.Tests
 {
     [TestClass()]
